@@ -4,6 +4,6 @@ module me.gamingcuber.calorietracker.calorietracker {
 
     requires org.controlsfx.controls;
 
-    opens me.gamingcuber.calorietracker.calorietracker to javafx.fxml;
-    exports me.gamingcuber.calorietracker.calorietracker;
+    opens me.gamingcuber.calorietracker to javafx.fxml;
+    exports me.gamingcuber.calorietracker;
 }

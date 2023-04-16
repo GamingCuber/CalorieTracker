@@ -1,4 +1,4 @@
-package me.gamingcuber.calorietracker.calorietracker;
+package me.gamingcuber.calorietracker;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
