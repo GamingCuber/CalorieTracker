@@ -5,18 +5,19 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
-import org.json.simple.JSONObject;
 
 import java.io.IOException;
 import java.time.OffsetDateTime;
 
 public class CalorieTrackerApplication extends Application {
     int totalCalories;
-    JSONObject calorieJSON = new JSONObject();
     Button enterButton;
-    GridPane pane;
+    Button resetButton;
+    BorderPane pane;
     Label caloricCountText = new Label();
     TextField calorieField;
     OffsetDateTime dateEntered;
@@ -25,16 +26,24 @@ public class CalorieTrackerApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
 
-        pane = new GridPane();
+        pane = new BorderPane();
 
         calorieField = new TextField("Enter your Calories here");
-        pane.add(calorieField, 3, 3);
 
         enterButton = new Button();
         enterButton.setText("Enter your Calories");
         enterButton.setOnAction(e -> enterButtonClick());
 
+        resetButton = new Button();
+        resetButton.setText("Click Here to Reset Your Calories");
+        resetButton.setOnAction(e -> resetButtonClick());
+
         caloricCountText.setText("Total Calories Eaten: " + totalCalories);
+
+        pane.setTop(calorieField);
+        pane.setLeft(enterButton);
+        pane.setCenter(resetButton);
+        pane.setBottom(caloricCountText);
 
         Scene scene = new Scene(pane, 320, 240);
 
@@ -43,28 +52,25 @@ public class CalorieTrackerApplication extends Application {
         stage.show();
     }
 
-    public void enterButtonClick() {
+    private void resetButtonClick() {
 
-        dateEntered = OffsetDateTime.now();
-        if (previousdateEntered.getDayOfYear() == dateEntered.getDayOfYear()) {
-
-            int EnteredCalories = Integer.parseInt(calorieField.getText());
-            totalCalories = totalCalories + EnteredCalories;
-            caloricCountText.setText("Total Calorie Count: " + totalCalories);
-
-
-        } else {
-
-
-
-        }
+        totalCalories = 0;
 
     }
 
-    @Override
-    public void stop() {
+    private void enterButtonClick() {
 
+            int EnteredCalories = Integer.parseInt(calorieField.getText());
+            totalCalories = totalCalories + EnteredCalories;
+            if (totalCalories > 2000) {
 
+                caloricCountText.setText("Oh no! Your calories for today have exceeded to " + totalCalories);
+
+            } else {
+
+                caloricCountText.setText("Total Calorie Count: " + totalCalories);
+
+            }
 
     }
 

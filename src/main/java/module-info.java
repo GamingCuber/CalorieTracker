@@ -1,8 +1,6 @@
-module me.gamingcuber.calorietracker{
+module me.gamingcuber.calorietracker {
     requires javafx.controls;
     requires javafx.fxml;
-
-    requires json.simple;
 
     requires org.controlsfx.controls;
 
